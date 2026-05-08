@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+
+  # MySQL Database
+  mysql-db:
+    image: mysql:8.0
+    container_name: food-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: foodapp2
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - food-network
+
+  # Spring Boot Backend
+  food-backend:
+    image: kapilrajputdocker/online-food-ordering-system-repo:1.0
+    container_name: food-backend
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/foodapp2
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    depends_on:
+      - mysql-db
+    networks:
+      - food-network
+
+  # React Frontend
+  food-frontend:
+    image: kapilrajputdocker/online-food-ordering-system-frontend-repo:1.2
+    container_name: food-frontend
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - food-backend
+    networks:
+      - food-network
+
+volumes:
+  mysql_data:
+
+networks:
+  food-network:
+    driver: bridge
