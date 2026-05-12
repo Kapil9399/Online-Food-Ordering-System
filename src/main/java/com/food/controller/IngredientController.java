@@ -43,7 +43,7 @@ public class IngredientController {
 		return new ResponseEntity<>(item,HttpStatus.CREATED);
 	}
 	
-	@PutMapping("/{id}/stoke")
+	@PutMapping("/{id}/stock")
 	public ResponseEntity<IngredientsItem> updateIngredientStock(@PathVariable Long id) throws Exception{
 		
 		IngredientsItem item = ingredientsService.updateStock(id);
@@ -52,7 +52,10 @@ public class IngredientController {
 	
 	@GetMapping("/restaurant/{id}")
 	public ResponseEntity<List<IngredientsItem> > getRestaurantIngredient(@PathVariable Long id) throws Exception{
-		
+
+		if (id == null) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 		List<IngredientsItem> items = ingredientsService.findRestaurantsIngredients(id);
 		return new ResponseEntity<>(items,HttpStatus.OK);
 	}
@@ -60,7 +63,10 @@ public class IngredientController {
 	
 	@GetMapping("/restaurant/{id}/category")
 	public ResponseEntity<List<IngredientCategory> > getRestaurantIngredientCategory(@PathVariable Long id) throws Exception{
-		
+
+		if (id == null) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 		List<IngredientCategory> items = ingredientsService.findIngredientCategoryByRestaurantId(id);
 		return new ResponseEntity<>(items,HttpStatus.OK);
 	}
