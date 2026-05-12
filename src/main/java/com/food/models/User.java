@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.food.dto.RestaurantDto;
+	import com.food.dto.RestaurantDto;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.ElementCollection;
@@ -44,6 +44,9 @@ public class User {
 	
 	@ElementCollection
 	private List<RestaurantDto> favorites = new ArrayList();
+	// ✅ FIXED
+	/*@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<RestaurantDto> favorites = new ArrayList<>();*/
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval=true)
 	private List<Address> addresses= new ArrayList<>();
