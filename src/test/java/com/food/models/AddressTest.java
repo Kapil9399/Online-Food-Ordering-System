@@ -1,9 +1,6 @@
 package com.food.models;
-
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class AddressTest {
 
@@ -38,13 +35,11 @@ public class AddressTest {
      address.setPincode("452010");
      address.setCountry("India");
 
-        assertEquals(1L, address.getId());
-        assertEquals("Nanda Nagar", address.getStreetAddress());
-        assertEquals("indore", address.getCity());
-        assertEquals("Madhya Pradesh", address.getState());
-        assertEquals("452010", address.getPincode());
-        assertEquals("India", address.getCountry());
+     assertEquals(1L, address.getId());
+     assertEquals("Nanda Nagar", address.getStreetAddress());
+     assertEquals("indore", address.getCity());
+     assertEquals("Madhya Pradesh", address.getState());
+     assertEquals("452010", address.getPincode());
+     assertEquals("India", address.getCountry());
     }
-
-
 }
