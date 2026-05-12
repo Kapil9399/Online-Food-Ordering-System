@@ -69,7 +69,7 @@ public class IngredientServiceImp implements IngredientsService {
 		
 		IngredientsItem ingredient = ingredientItemRepository.save(item);
 		
-		category.getIngredients().add(ingredient);
+		//category.getIngredients().add(ingredient);
 		
 		return ingredient;
 	}
