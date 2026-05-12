@@ -3,8 +3,11 @@ package com.food.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,6 +24,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class IngredientCategory {
 
 	@Id
@@ -33,7 +37,11 @@ public class IngredientCategory {
 	@ManyToOne
 	private Restaurant restaurant;
 	
-	@OneToMany(mappedBy="category",cascade=CascadeType.ALL)
+	//@OneToMany(mappedBy="category",cascade=CascadeType.ALL)
+	//private List<IngredientsItem> ingredients = new ArrayList<>();
+
+	// ✅ add @JsonManagedReference
+	@OneToMany(mappedBy="category", cascade=CascadeType.ALL)
+//	@JsonManagedReference
 	private List<IngredientsItem> ingredients = new ArrayList<>();
-	
 }
