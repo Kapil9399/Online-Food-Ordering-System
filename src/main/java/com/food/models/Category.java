@@ -20,6 +20,6 @@ public class Category {
 	private String name;
 	
 	@JsonIgnore
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne//(cascade = CascadeType.PERSIST)
 	private Restaurant restaurant;
 }
