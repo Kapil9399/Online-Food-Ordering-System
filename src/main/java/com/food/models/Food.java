@@ -26,14 +26,20 @@ public class Food {
 	
 	private Long price;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne//	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JsonIgnore
 	private Category foodCategory;
-	
-	@Column(length=1000)
+
+	/*@Column(length=1000)
 	@ElementCollection
 	private List<String> images;
-	
+	*/
+
+	@ElementCollection
+	@CollectionTable(name = "food_images", joinColumns = @JoinColumn(name = "food_id"))
+	@Column(name = "image_url", columnDefinition = "TEXT")
+	private List<String> images;
+
 	private boolean available;
 	
 	@ManyToOne
